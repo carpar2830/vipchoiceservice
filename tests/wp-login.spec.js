@@ -37,7 +37,7 @@ test.describe('WordPress admin login', () => {
     await expect(page).toHaveURL(/\/wp-admin\/?/);
   });
 
-  test('can log out cleanly', async ({ page, context }) => {
+  test('can log out cleanly', async ({ page }) => {
     await page.goto('/wp-login.php');
     await page.locator('#user_login').fill(WP_USER);
     await page.locator('#user_pass').fill(WP_PASS);
@@ -45,8 +45,9 @@ test.describe('WordPress admin login', () => {
       page.waitForURL(/\/wp-admin\/?/, { timeout: 30000 }),
       page.locator('#wp-submit').click(),
     ]);
-    const logout = page.locator('#wp-admin-bar-logout a').first();
-    await logout.click();
+    // Logout sits inside the hidden "My Account" submenu; hover to reveal it.
+    await page.locator('#wp-admin-bar-my-account').hover();
+    await page.locator('#wp-admin-bar-logout a').click();
     await expect(page.locator('#loginform')).toBeVisible({ timeout: 15000 });
   });
 });
