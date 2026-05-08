@@ -45,9 +45,12 @@ test.describe('WordPress admin login', () => {
       page.waitForURL(/\/wp-admin\/?/, { timeout: 30000 }),
       page.locator('#wp-submit').click(),
     ]);
-    // Logout sits inside the hidden "My Account" submenu; hover to reveal it.
-    await page.locator('#wp-admin-bar-my-account').hover();
-    await page.locator('#wp-admin-bar-logout a').click();
+    // The logout link sits inside a hidden admin-bar submenu and the
+    // hover-to-expand interaction does not work on mobile viewports.
+    // Read the nonce-bearing href directly and navigate to it instead.
+    const logoutHref = await page.locator('#wp-admin-bar-logout a').getAttribute('href');
+    expect(logoutHref, 'logout link should have an href').toBeTruthy();
+    await page.goto(logoutHref);
     await expect(page.locator('#loginform')).toBeVisible({ timeout: 15000 });
   });
 });
