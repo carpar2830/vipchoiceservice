@@ -1,0 +1,20 @@
+{
+  "name": "vipchoiceservice",
+  "version": "1.0.0",
+  "description": "Tax preparation, bookkeeping, notary, and business services website and marketing assets for Dallas, TX",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://local_proxy@127.0.0.1:46187/git/carpar2830/vipchoiceservice"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
