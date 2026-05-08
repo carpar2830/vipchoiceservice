@@ -1,5 +1,5 @@
 // @ts-check
-const { test, expect } = require('playwright/test');
+const { test, expect } = require('@playwright/test');
 
 test.describe('vipchoiceservice.com homepage', () => {
   test('loads successfully with HTTP 200', async ({ page }) => {

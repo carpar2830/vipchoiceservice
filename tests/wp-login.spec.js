@@ -1,5 +1,5 @@
 // @ts-check
-const { test, expect } = require('playwright/test');
+const { test, expect } = require('@playwright/test');
 
 const WP_USER = process.env.WP_USER;
 const WP_PASS = process.env.WP_PASS;
