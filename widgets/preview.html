@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VIP Choice — Widget Preview</title>
+<style>
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;margin:0;padding:40px 20px;background:linear-gradient(135deg,#f8fafc,#e2e8f0);min-height:100vh;color:#1B2B5E}
+  .wrap{max-width:680px;margin:0 auto;background:#fff;border-radius:16px;padding:36px;box-shadow:0 8px 32px rgba(0,0,0,.08)}
+  h1{margin:0 0 8px;font-size:24px;color:#1B2B5E}
+  p{color:#475569;line-height:1.6}
+  .test{background:#fff9ec;border:1px solid #C9A227;border-radius:11px;padding:16px 20px;margin-top:20px}
+  .test h3{margin:0 0 10px;color:#92660c;font-size:14px;text-transform:uppercase;letter-spacing:.5px}
+  .test ol{margin:0;padding-left:22px;color:#475569;line-height:1.8;font-size:14px}
+  .test code{background:#fff;padding:2px 6px;border-radius:4px;border:1px solid #e2e8f0;font-size:13px}
+  .test-cta{display:inline-block;margin-top:14px;background:linear-gradient(135deg,#C9A227,#e8c04a);color:#1B2B5E;font-weight:700;padding:12px 22px;border-radius:50px;text-decoration:none;font-size:14px;border:none;cursor:pointer;font-family:inherit}
+  .test-cta:hover{transform:translateY(-1px)}
+  .arrow{font-size:36px;color:#C9A227;text-align:center;margin:20px 0;animation:bob 1.5s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <h1>🧪 VIP Choice — Small Business Widget Preview</h1>
+  <p>This is a standalone preview of the funnel widget. The same code is what you'll paste into WordPress.</p>
+
+  <div class="test">
+    <h3>What to test</h3>
+    <ol>
+      <li>Click the gold <strong>🏢 Free Business Consultation</strong> button (bottom-right)</li>
+      <li>Walk through all 7 steps in <strong>English</strong>, then click "Start Over" and try in <strong>Spanish</strong></li>
+      <li>On the contact form, try entering a name with quotes (e.g. <code>John "JD" Smith</code>) — it should keep all characters</li>
+      <li>Pick a service, then quickly change to a different service — the funnel should NOT skip any questions</li>
+      <li>On the final screen, click <strong>WhatsApp</strong> — verify the message has all your answers and goes to <code>(972) 807-2217</code></li>
+      <li>On the final screen, click <strong>Book Free Consultation</strong> — Calendly popup should open with name/email pre-filled</li>
+    </ol>
+    <button class="test-cta" onclick="VWSB.open()">Open the widget now</button>
+  </div>
+
+  <div class="arrow">↘</div>
+  <p style="text-align:center;color:#94a3b8;font-size:13px">Look bottom-right of this page →</p>
+</div>
+
+<!-- ── WIDGET STARTS HERE — exactly what gets pasted into WordPress ──────── -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+
+<style>
+  #vwsb-btn{position:fixed;bottom:84px;right:24px;background:linear-gradient(135deg,#C9A227,#e8c04a);color:#1B2B5E;border:none;border-radius:50px;padding:13px 20px;font-family:'Inter',sans-serif;font-weight:700;font-size:14px;cursor:pointer;box-shadow:0 4px 18px rgba(201,162,39,.45);z-index:9998;display:flex;align-items:center;gap:8px;transition:transform .2s,box-shadow .2s;animation:vwsb-glow 2.5s ease-in-out infinite}
+  #vwsb-btn:hover{transform:translateY(-2px);box-shadow:0 7px 26px rgba(201,162,39,.55)}
+  @keyframes vwsb-glow{0%,100%{box-shadow:0 4px 18px rgba(201,162,39,.45)}50%{box-shadow:0 4px 28px rgba(201,162,39,.75)}}
+  #vwsb-ov{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;display:none;align-items:center;justify-content:center;padding:16px;font-family:'Inter',sans-serif}
+  #vwsb-ov.open{display:flex;animation:vwsb-fin .2s ease}
+  @keyframes vwsb-fin{from{opacity:0}to{opacity:1}}
+  #vwsb-modal{background:#fff;border-radius:20px;width:100%;max-width:460px;max-height:92vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 24px 70px rgba(0,0,0,.28);animation:vwsb-sup .3s cubic-bezier(.16,1,.3,1)}
+  @keyframes vwsb-sup{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
+  .vwsb-mh{background:linear-gradient(135deg,#1B2B5E,#2a3f7e);padding:16px 18px 0;flex-shrink:0}
+  .vwsb-mh-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+  .vwsb-mh-brand{display:flex;align-items:center;gap:10px}
+  .vwsb-mh-ico{width:38px;height:38px;border-radius:50%;background:#C9A227;color:#1B2B5E;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;flex-shrink:0}
+  .vwsb-mh-name{color:#fff;font-weight:700;font-size:13px}
+  .vwsb-mh-sub{color:rgba(255,255,255,.6);font-size:11px}
+  .vwsb-mh-x{background:rgba(255,255,255,.15);border:none;color:#fff;width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:background .2s}
+  .vwsb-mh-x:hover{background:rgba(255,255,255,.28)}
+  .vwsb-mh-lbl{font-size:10px;font-weight:600;letter-spacing:.7px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:5px}
+  .vwsb-mh-bar{height:4px;background:rgba(255,255,255,.18);border-radius:2px;margin-bottom:14px}
+  .vwsb-mh-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,#C9A227,#e8c04a);transition:width .4s ease}
+  .vwsb-mb{padding:20px 18px;overflow-y:auto;flex:1}
+  .vwsb-mb.ani{animation:vwsb-sin .28s ease}
+  @keyframes vwsb-sin{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:translateX(0)}}
+  .vwsb-st{font-size:18px;font-weight:800;color:#1B2B5E;margin-bottom:4px;line-height:1.3}
+  .vwsb-ss{font-size:13px;color:#64748b;margin-bottom:16px;line-height:1.5}
+  .vwsb-vg{display:grid;gap:8px}
+  .vwsb-g2{grid-template-columns:1fr 1fr}
+  .vwsb-vo{border:2px solid #e2e8f0;border-radius:11px;padding:13px 12px;cursor:pointer;text-align:center;background:#fff;display:flex;flex-direction:column;align-items:center;gap:4px;position:relative;transition:border-color .18s,background .18s,transform .14s;user-select:none}
+  .vwsb-vo:hover{border-color:#C9A227;background:#fffbf0;transform:translateY(-1px)}
+  .vwsb-vo.sel{border-color:#C9A227;background:#fffbf0}
+  .vwsb-vo.sel::after{content:'✓';position:absolute;top:5px;right:8px;color:#C9A227;font-weight:800;font-size:11px}
+  .vwsb-vo-ic{font-size:22px}
+  .vwsb-vo-lb{font-size:13px;font-weight:700;color:#1B2B5E;line-height:1.3}
+  .vwsb-vo-sb{font-size:11px;color:#94a3b8;line-height:1.2}
+  .vwsb-vo.row{flex-direction:row;text-align:left;padding:13px 14px;gap:10px}
+  .vwsb-vo.row .vwsb-vo-ic{font-size:22px;flex-shrink:0}
+  .vwsb-vo.row .vwsb-vo-tx{flex:1}
+  .vwsb-vo.row .vwsb-vo-ck{color:#C9A227;font-size:18px;font-weight:800;flex-shrink:0;display:none}
+  .vwsb-vo.row.sel .vwsb-vo-ck{display:block}
+  .vwsb-vo.row.sel::after{display:none}
+  .vwsb-vo.lang{padding:18px 10px}
+  .vwsb-vo.lang .vwsb-vo-ic{font-size:30px}
+  .vwsb-vo.lang .vwsb-vo-lb{font-size:15px;font-weight:800}
+  .vwsb-form-group{margin-bottom:13px}
+  .vwsb-form-label{display:block;font-size:12px;font-weight:600;color:#475569;margin-bottom:4px;text-transform:uppercase;letter-spacing:.4px}
+  .vwsb-form-input,.vwsb-form-sel{width:100%;border:1.5px solid #e2e8f0;border-radius:9px;padding:10px 12px;font-family:'Inter',sans-serif;font-size:13px;color:#1B2B5E;transition:border-color .18s;outline:none;box-sizing:border-box;background:#fff}
+  .vwsb-form-input:focus,.vwsb-form-sel:focus{border-color:#C9A227}
+  .vwsb-form-input::placeholder{color:#cbd5e1}
+  .vwsb-req{color:#C9A227;margin-left:2px}
+  .vwsb-tip{background:#f0f9ff;border-radius:9px;padding:10px 13px;margin-top:6px;font-size:12px;color:#0369a1;line-height:1.5}
+  .vwsb-err{background:#fef2f2;border-radius:11px;padding:12px;color:#991b1b;font-size:13px;line-height:1.5;margin-bottom:12px;border:1px solid #fecaca}
+  .vwsb-mf{padding:12px 18px;border-top:1px solid #f1f5f9;display:flex;gap:8px;flex-shrink:0}
+  .vwsb-btn{flex:1;padding:12px;border-radius:11px;border:none;font-family:'Inter',sans-serif;font-weight:600;font-size:14px;cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;gap:5px}
+  .vwsb-bp{background:linear-gradient(135deg,#1B2B5E,#2a3f7e);color:#fff}
+  .vwsb-bp:hover:not(:disabled){background:linear-gradient(135deg,#152347,#1B2B5E);transform:translateY(-1px)}
+  .vwsb-bp:disabled{background:#cbd5e1;cursor:not-allowed;transform:none}
+  .vwsb-bs{background:#f1f5f9;color:#475569;flex:0 0 auto;padding:12px 14px}
+  .vwsb-bs:hover{background:#e2e8f0}
+  .vwsb-bg{background:linear-gradient(135deg,#C9A227,#e8c04a);color:#1B2B5E;font-weight:800}
+  .vwsb-bg:hover:not(:disabled){background:linear-gradient(135deg,#b8911f,#C9A227);transform:translateY(-1px)}
+  .vwsb-btn-full{width:100%;border-radius:11px;border:none;font-family:'Inter',sans-serif;font-weight:700;font-size:14px;cursor:pointer;transition:all .18s;padding:14px;display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
+  .vwsb-summary{background:#f8fafc;border-radius:11px;padding:13px 15px;margin-bottom:14px;border:1px solid #e2e8f0}
+  .vwsb-summary-t{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#94a3b8;margin-bottom:8px}
+  .vwsb-summary-r{display:flex;justify-content:space-between;font-size:12px;color:#475569;padding:4px 0;border-bottom:1px solid #eef2f7;gap:10px}
+  .vwsb-summary-r:last-child{border:none}
+  .vwsb-summary-r span:last-child{color:#1B2B5E;font-weight:600;text-align:right}
+  .vwsb-done{background:linear-gradient(135deg,#1B2B5E,#2a3f7e);border-radius:15px;padding:22px;text-align:center;margin-bottom:14px}
+  .vwsb-done-ic{font-size:42px;margin-bottom:8px}
+  .vwsb-done-tt{color:#fff;font-weight:800;font-size:17px;margin-bottom:5px}
+  .vwsb-done-sb{color:rgba(255,255,255,.7);font-size:12px;line-height:1.5}
+  @media(max-width:480px){
+    #vwsb-modal{border-radius:20px 20px 0 0;max-height:96vh}
+    #vwsb-ov{align-items:flex-end;padding:0}
+  }
+</style>
+<button id="vwsb-btn" onclick="VWSB.open()"><span>🏢</span><span id="vwsb-btxt">Free Business Consultation</span></button>
+<div id="vwsb-ov" onclick="VWSB.ov(event)">
+  <div id="vwsb-modal">
+    <div class="vwsb-mh">
+      <div class="vwsb-mh-top">
+        <div class="vwsb-mh-brand">
+          <div class="vwsb-mh-ico">VIP</div>
+          <div>
+            <div class="vwsb-mh-name">VIP Choice Service</div>
+            <div class="vwsb-mh-sub" id="vwsb-sub">Small Business Services · Dallas, TX</div>
+          </div>
+        </div>
+        <button class="vwsb-mh-x" onclick="VWSB.close()" aria-label="Close">×</button>
+      </div>
+      <div class="vwsb-mh-lbl" id="vwsb-lbl"></div>
+      <div class="vwsb-mh-bar"><div class="vwsb-mh-fill" id="vwsb-fill" style="width:0%"></div></div>
+    </div>
+    <div class="vwsb-mb" id="vwsb-body"></div>
+    <div class="vwsb-mf" id="vwsb-foot"></div>
+  </div>
+</div>
+<script>
+// PREVIEW NOTE: this is the same logic as widgets/smallbusiness.html.
+// To update, edit smallbusiness.html and copy the <script> block over.
+(function(){"use strict";
+var CFG={phone:'9728072217',phoneDisp:'(972) 807-2217',whatsapp:'https://wa.me/19728072217',calendly:'https://calendly.com/vipchoiceservice/60min',buttonText:{en:'Free Business Consultation',es:'Consulta Gratis de Negocios'}};
+var STEP={LANG:'lang',SVC:'svc',STATUS:'status',OWNERS:'owners',TIMELINE:'timeline',CONTACT:'contact',DONE:'done'};
+var st={lang:'en',step:STEP.LANG,history:[],svc:null,status:null,owners:null,timeline:null,name:'',phone:'',email:'',state:'TX',otherState:'',hasEIN:false,hasBank:false,source:'',notes:''};
+var C={en:{sub:'Small Business Services · Dallas, TX',back:'Back',next:'Continue →',bookCal:'📅 Book Free Consultation',sendWa:'💬 Send via WhatsApp',startOver:'🔄 Start Over',requiredErr:'Please fill in name and phone before continuing.',steps:{lang:{lbl:'Welcome',title:'Welcome!',sub:'Choose your preferred language.',pct:8},svc:{lbl:'Service',title:'Which service do you need?',sub:"Tell us what you're looking for.",pct:24},status:{lbl:'Status',title:'Is your business already formed?',sub:'',pct:38},owners:{lbl:'Owners',title:'How many owners or partners?',sub:'Including yourself.',pct:52},timeline:{lbl:'Timeline',title:'When do you need this done?',sub:'',pct:66},contact:{lbl:'Your Info',title:'Last step — how do we reach you?',sub:'A quick note from us, no spam ever.',pct:88},done:{lbl:'All Set',title:'Almost there! Pick your next step.',sub:'',pct:100}},svcs:[{ic:'🏢',lb:'Open an LLC',sb:'Form a new LLC',v:'llc'},{ic:'📝',lb:'DBA',sb:'Doing Business As',v:'dba'},{ic:'🔢',lb:'EIN Only',sb:'Federal Tax ID',v:'ein'},{ic:'🛡️',lb:'Registered Agent',sb:'Annual service',v:'agent'},{ic:'📊',lb:'Franchise Report',sb:'Annual filing',v:'franchise'},{ic:'🔒',lb:'Close a Company',sb:'Dissolution',v:'close'}],statuses:[{ic:'✅',lb:'Yes, already formed',sb:'I have an existing business',v:'formed'},{ic:'🚀',lb:'No, starting fresh',sb:'Brand new business',v:'fresh'},{ic:'🤔',lb:'Not sure / Need guidance',sb:'Help me figure it out',v:'unsure'}],ownerOpts:[{ic:'👤',lb:'Just me',sb:'1 owner',v:'1'},{ic:'👫',lb:'2 owners',sb:'Partner / spouse',v:'2'},{ic:'👥',lb:'3 owners',sb:'',v:'3'},{ic:'👨‍👩‍👧',lb:'4 or more',sb:'',v:'4+'}],timelines:[{ic:'⚡',lb:'ASAP — this week',sb:'I need it fast',v:'asap'},{ic:'📅',lb:'Within 30 days',sb:'Soon but flexible',v:'30d'},{ic:'🔍',lb:'Just researching',sb:'No rush yet',v:'research'}],sources:[{v:'',lb:'How did you hear about us? (optional)'},{v:'google',lb:'Google search'},{v:'facebook',lb:'Facebook'},{v:'instagram',lb:'Instagram'},{v:'referral',lb:'Referred by friend / family'},{v:'returning',lb:"I'm a returning client"},{v:'other',lb:'Other'}],states:[{v:'TX',lb:'Texas'},{v:'OTHER',lb:'Other state (specify below)'}],labels:{name:'Full Name',phone:'Phone Number',email:'Email (optional)',state:'State of Business',otherState:'Specify state',hasEIN:'I already have an EIN',hasBank:'I already have a business bank account',notes:'Anything else we should know? (optional)'},doneTitle:'Awesome — we have what we need!',doneSub:"Choose how to finish. Either way, we'll see your details and reach out fast.",summaryTitle:'Your Summary',svcLabel:'Service',statusLabel:'Status',ownersLabel:'Owners',timelineLabel:'Timeline',stateLabel:'State',einLabel:'Has EIN',bankLabel:'Has Bank Account',sourceLabel:'Source',yes:'Yes',no:'No',waLeadHeader:'NEW SMALL BUSINESS LEAD',waMsgEnd:'Hi! I just filled out your form. Please contact me to schedule.'},es:{sub:'Servicios de Negocios · Dallas, TX',back:'Atrás',next:'Continuar →',bookCal:'📅 Agendar Consulta Gratis',sendWa:'💬 Enviar por WhatsApp',startOver:'🔄 Empezar de Nuevo',requiredErr:'Por favor ingrese su nombre y teléfono para continuar.',steps:{lang:{lbl:'Bienvenido',title:'¡Bienvenido!',sub:'Elija su idioma preferido.',pct:8},svc:{lbl:'Servicio',title:'¿Qué servicio necesita?',sub:'Cuéntenos qué busca.',pct:24},status:{lbl:'Estado',title:'¿Su negocio ya está formado?',sub:'',pct:38},owners:{lbl:'Dueños',title:'¿Cuántos dueños o socios?',sub:'Incluyéndose a usted.',pct:52},timeline:{lbl:'Plazo',title:'¿Para cuándo lo necesita?',sub:'',pct:66},contact:{lbl:'Sus Datos',title:'Último paso — ¿cómo lo contactamos?',sub:'Un mensaje de nosotros, nunca spam.',pct:88},done:{lbl:'¡Listo!',title:'¡Casi listo! Elija su siguiente paso.',sub:'',pct:100}},svcs:[{ic:'🏢',lb:'Abrir una LLC',sb:'Formar una nueva LLC',v:'llc'},{ic:'📝',lb:'DBA',sb:'Nombre comercial',v:'dba'},{ic:'🔢',lb:'Solo EIN',sb:'ID Federal de Impuestos',v:'ein'},{ic:'🛡️',lb:'Agente Registrado',sb:'Servicio anual',v:'agent'},{ic:'📊',lb:'Reporte de Franquicia',sb:'Presentación anual',v:'franchise'},{ic:'🔒',lb:'Cerrar una Empresa',sb:'Disolución',v:'close'}],statuses:[{ic:'✅',lb:'Sí, ya está formado',sb:'Tengo un negocio existente',v:'formed'},{ic:'🚀',lb:'No, empiezo de cero',sb:'Negocio totalmente nuevo',v:'fresh'},{ic:'🤔',lb:'No estoy seguro/a',sb:'Necesito orientación',v:'unsure'}],ownerOpts:[{ic:'👤',lb:'Solo yo',sb:'1 dueño',v:'1'},{ic:'👫',lb:'2 dueños',sb:'Socio / esposa',v:'2'},{ic:'👥',lb:'3 dueños',sb:'',v:'3'},{ic:'👨‍👩‍👧',lb:'4 o más',sb:'',v:'4+'}],timelines:[{ic:'⚡',lb:'Lo antes posible',sb:'Lo necesito ya',v:'asap'},{ic:'📅',lb:'En los próximos 30 días',sb:'Pronto pero flexible',v:'30d'},{ic:'🔍',lb:'Solo estoy investigando',sb:'Sin prisa por ahora',v:'research'}],sources:[{v:'',lb:'¿Cómo nos conoció? (opcional)'},{v:'google',lb:'Búsqueda de Google'},{v:'facebook',lb:'Facebook'},{v:'instagram',lb:'Instagram'},{v:'referral',lb:'Recomendación de amigo / familiar'},{v:'returning',lb:'Soy cliente recurrente'},{v:'other',lb:'Otro'}],states:[{v:'TX',lb:'Texas'},{v:'OTHER',lb:'Otro estado (especifique abajo)'}],labels:{name:'Nombre Completo',phone:'Número de Teléfono',email:'Correo (opcional)',state:'Estado del Negocio',otherState:'Especifique el estado',hasEIN:'Ya tengo EIN',hasBank:'Ya tengo cuenta bancaria comercial',notes:'¿Algo más que debamos saber? (opcional)'},doneTitle:'¡Perfecto — tenemos lo que necesitamos!',doneSub:'Elija cómo terminar. De cualquier manera veremos sus datos y le contactaremos pronto.',summaryTitle:'Su Resumen',svcLabel:'Servicio',statusLabel:'Estado',ownersLabel:'Dueños',timelineLabel:'Plazo',stateLabel:'Estado',einLabel:'Tiene EIN',bankLabel:'Tiene Cuenta Bancaria',sourceLabel:'Fuente',yes:'Sí',no:'No',waLeadHeader:'NUEVO LEAD — SERVICIOS DE NEGOCIOS',waMsgEnd:'¡Hola! Acabo de llenar su formulario. Por favor contácteme para agendar.'}};
+function L(){return C[st.lang]}function el(id){return document.getElementById(id)}
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;')}
+var _adv=null;function schAdv(ms){if(_adv)clearTimeout(_adv);_adv=setTimeout(function(){_adv=null;window.VWSB.next()},ms)}
+function setBody(h){var b=el('vwsb-body');if(!b)return;b.className='vwsb-mb';b.innerHTML=h;void b.offsetWidth;b.className='vwsb-mb ani'}
+function setFoot(h){var f=el('vwsb-foot');if(f)f.innerHTML=h}
+function header(){var l=L(),sd=l.steps[st.step]||{lbl:'',pct:0};el('vwsb-lbl').textContent=sd.lbl;el('vwsb-fill').style.width=sd.pct+'%';el('vwsb-sub').textContent=l.sub;el('vwsb-btxt').textContent=CFG.buttonText[st.lang]||CFG.buttonText.en}
+function findLabel(arr,v){for(var i=0;i<arr.length;i++)if(arr[i].v===v)return arr[i].lb;return v||''}
+function rowCards(items,key){return '<div class="vwsb-vg">'+items.map(function(it){var sel=(st[key]===it.v);return '<div class="vwsb-vo row'+(sel?' sel':'')+'" onclick="VWSB.pick(\''+key+'\',\''+it.v+'\')"><div class="vwsb-vo-ic">'+it.ic+'</div><div class="vwsb-vo-tx"><div class="vwsb-vo-lb">'+it.lb+'</div>'+(it.sb?'<div class="vwsb-vo-sb">'+it.sb+'</div>':'')+'</div><div class="vwsb-vo-ck">✓</div></div>'}).join('')+'</div>'}
+function gridCards(items,key,cols){var cls=cols===2?'vwsb-g2':'';return '<div class="vwsb-vg '+cls+'">'+items.map(function(it){var sel=(st[key]===it.v);return '<div class="vwsb-vo'+(sel?' sel':'')+'" onclick="VWSB.pick(\''+key+'\',\''+it.v+'\')"><div class="vwsb-vo-ic">'+it.ic+'</div><div class="vwsb-vo-lb">'+it.lb+'</div>'+(it.sb?'<div class="vwsb-vo-sb">'+it.sb+'</div>':'')+'</div>'}).join('')+'</div>'}
+function rLang(){setBody('<div class="vwsb-st">Welcome / ¡Bienvenido!</div><div class="vwsb-ss">Select language · Seleccione su idioma</div><div class="vwsb-vg vwsb-g2"><div class="vwsb-vo lang'+(st.lang==='en'?' sel':'')+'" onclick="VWSB.pick(\'lang\',\'en\')"><div class="vwsb-vo-ic">🇺🇸</div><div class="vwsb-vo-lb">English</div></div><div class="vwsb-vo lang'+(st.lang==='es'?' sel':'')+'" onclick="VWSB.pick(\'lang\',\'es\')"><div class="vwsb-vo-ic">🇲🇽</div><div class="vwsb-vo-lb">Español</div></div></div>');setFoot('<button class="vwsb-btn vwsb-bp" onclick="VWSB.next()">'+(st.lang==='es'?'Continuar →':'Continue →')+'</button>')}
+function rSvc(){var l=L(),sd=l.steps.svc;setBody('<div class="vwsb-st">'+sd.title+'</div><div class="vwsb-ss">'+sd.sub+'</div>'+gridCards(l.svcs,'svc',2));setFoot('<button class="vwsb-btn vwsb-bs" onclick="VWSB.back()">'+l.back+'</button><button class="vwsb-btn vwsb-bp" onclick="VWSB.next()" '+(st.svc?'':'disabled')+'>'+l.next+'</button>')}
+function rStatus(){var l=L(),sd=l.steps.status;setBody('<div class="vwsb-st">'+sd.title+'</div>'+rowCards(l.statuses,'status'));setFoot('<button class="vwsb-btn vwsb-bs" onclick="VWSB.back()">'+l.back+'</button><button class="vwsb-btn vwsb-bp" onclick="VWSB.next()" '+(st.status?'':'disabled')+'>'+l.next+'</button>')}
+function rOwners(){var l=L(),sd=l.steps.owners;setBody('<div class="vwsb-st">'+sd.title+'</div><div class="vwsb-ss">'+sd.sub+'</div>'+rowCards(l.ownerOpts,'owners'));setFoot('<button class="vwsb-btn vwsb-bs" onclick="VWSB.back()">'+l.back+'</button><button class="vwsb-btn vwsb-bp" onclick="VWSB.next()" '+(st.owners?'':'disabled')+'>'+l.next+'</button>')}
+function rTimeline(){var l=L(),sd=l.steps.timeline;setBody('<div class="vwsb-st">'+sd.title+'</div>'+rowCards(l.timelines,'timeline'));setFoot('<button class="vwsb-btn vwsb-bs" onclick="VWSB.back()">'+l.back+'</button><button class="vwsb-btn vwsb-bp" onclick="VWSB.next()" '+(st.timeline?'':'disabled')+'>'+l.next+'</button>')}
+function rContact(){var l=L(),sd=l.steps.contact,lab=l.labels;var so=l.states.map(function(s){return '<option value="'+esc(s.v)+'"'+(st.state===s.v?' selected':'')+'>'+esc(s.lb)+'</option>'}).join('');var sro=l.sources.map(function(s){return '<option value="'+esc(s.v)+'"'+(st.source===s.v?' selected':'')+'>'+esc(s.lb)+'</option>'}).join('');setBody('<div class="vwsb-st">'+sd.title+'</div><div class="vwsb-ss">'+sd.sub+'</div><div id="vwsb-form-err" style="display:none" class="vwsb-err"></div><div class="vwsb-form-group"><label class="vwsb-form-label">'+lab.name+'<span class="vwsb-req">*</span></label><input class="vwsb-form-input" type="text" placeholder="'+esc(lab.name)+'" value="'+esc(st.name)+'" oninput="VWSB.set(\'name\',this.value)"></div><div class="vwsb-form-group"><label class="vwsb-form-label">'+lab.phone+'<span class="vwsb-req">*</span></label><input class="vwsb-form-input" type="tel" placeholder="(555) 123-4567" value="'+esc(st.phone)+'" oninput="VWSB.set(\'phone\',this.value)"></div><div class="vwsb-form-group"><label class="vwsb-form-label">'+lab.email+'</label><input class="vwsb-form-input" type="email" placeholder="you@email.com" value="'+esc(st.email)+'" oninput="VWSB.set(\'email\',this.value)"></div><div class="vwsb-form-group"><label class="vwsb-form-label">'+lab.state+'</label><select class="vwsb-form-sel" onchange="VWSB.set(\'state\',this.value)">'+so+'</select></div>'+(st.state==='OTHER'?'<div class="vwsb-form-group"><label class="vwsb-form-label">'+lab.otherState+'</label><input class="vwsb-form-input" type="text" placeholder="e.g. California" value="'+esc(st.otherState)+'" oninput="VWSB.set(\'otherState\',this.value)"></div>':'')+'<div class="vwsb-form-group"><label style="display:flex;align-items:center;gap:8px;font-size:13px;color:#475569;cursor:pointer;font-weight:500"><input type="checkbox" '+(st.hasEIN?'checked':'')+' onchange="VWSB.set(\'hasEIN\',this.checked)" style="width:16px;height:16px;cursor:pointer">'+lab.hasEIN+'</label></div><div class="vwsb-form-group"><label style="display:flex;align-items:center;gap:8px;font-size:13px;color:#475569;cursor:pointer;font-weight:500"><input type="checkbox" '+(st.hasBank?'checked':'')+' onchange="VWSB.set(\'hasBank\',this.checked)" style="width:16px;height:16px;cursor:pointer">'+lab.hasBank+'</label></div><div class="vwsb-form-group"><select class="vwsb-form-sel" onchange="VWSB.set(\'source\',this.value)">'+sro+'</select></div><div class="vwsb-form-group"><label class="vwsb-form-label">'+lab.notes+'</label><textarea class="vwsb-form-input" rows="2" placeholder="..." oninput="VWSB.set(\'notes\',this.value)" style="resize:vertical;font-family:inherit">'+esc(st.notes)+'</textarea></div>');setFoot('<button class="vwsb-btn vwsb-bs" onclick="VWSB.back()">'+l.back+'</button><button class="vwsb-btn vwsb-bg" onclick="VWSB.next()">'+l.next+'</button>')}
+function summaryHTML(){var l=L();var sl=st.state==='OTHER'?(st.otherState||'(not specified)'):'Texas';var srl=st.source?findLabel(l.sources,st.source):'—';return '<div class="vwsb-summary"><div class="vwsb-summary-t">'+l.summaryTitle+'</div><div class="vwsb-summary-r"><span>'+l.svcLabel+'</span><span>'+esc(findLabel(l.svcs,st.svc))+'</span></div><div class="vwsb-summary-r"><span>'+l.statusLabel+'</span><span>'+esc(findLabel(l.statuses,st.status))+'</span></div><div class="vwsb-summary-r"><span>'+l.ownersLabel+'</span><span>'+esc(findLabel(l.ownerOpts,st.owners))+'</span></div><div class="vwsb-summary-r"><span>'+l.timelineLabel+'</span><span>'+esc(findLabel(l.timelines,st.timeline))+'</span></div><div class="vwsb-summary-r"><span>'+l.stateLabel+'</span><span>'+esc(sl)+'</span></div><div class="vwsb-summary-r"><span>'+l.einLabel+'</span><span>'+(st.hasEIN?l.yes:l.no)+'</span></div><div class="vwsb-summary-r"><span>'+l.bankLabel+'</span><span>'+(st.hasBank?l.yes:l.no)+'</span></div>'+(st.source?'<div class="vwsb-summary-r"><span>'+l.sourceLabel+'</span><span>'+esc(srl)+'</span></div>':'')+'</div>'}
+function buildWA(){var l=L();var sl=st.state==='OTHER'?(st.otherState||'(not specified)'):'Texas';var lines=['✅ '+l.waLeadHeader,'────────────────────',l.svcLabel+': '+findLabel(l.svcs,st.svc),l.statusLabel+': '+findLabel(l.statuses,st.status),l.ownersLabel+': '+findLabel(l.ownerOpts,st.owners),l.timelineLabel+': '+findLabel(l.timelines,st.timeline),l.stateLabel+': '+sl,l.einLabel+': '+(st.hasEIN?l.yes:l.no),l.bankLabel+': '+(st.hasBank?l.yes:l.no),'','👤 '+st.name,'📞 '+st.phone,(st.email?'📧 '+st.email:''),(st.source?l.sourceLabel+': '+findLabel(l.sources,st.source):''),(st.notes?'📝 '+st.notes:''),'────────────────────',l.waMsgEnd].filter(function(x){return x!==''});return lines.join('\n')}
+function buildCal(){var ctx=findLabel(L().svcs,st.svc)+' · '+st.name+' · '+st.phone;return CFG.calendly+'?a1='+encodeURIComponent(ctx)+'&name='+encodeURIComponent(st.name||'')+'&email='+encodeURIComponent(st.email||'')}
+function rDone(){var l=L();var wl=CFG.whatsapp+'?text='+encodeURIComponent(buildWA());setBody('<div class="vwsb-done"><div class="vwsb-done-ic">🎉</div><div class="vwsb-done-tt">'+l.doneTitle+'</div><div class="vwsb-done-sb">'+l.doneSub+'</div></div>'+summaryHTML()+'<button class="vwsb-btn-full vwsb-bg" onclick="VWSB.openCal()" style="margin-bottom:8px">'+l.bookCal+'</button><a href="'+wl+'" target="_blank" class="vwsb-btn-full" style="background:linear-gradient(135deg,#25D366,#1da851);color:#fff">'+l.sendWa+'</a>');setFoot('<button class="vwsb-btn vwsb-bs" onclick="VWSB.back()">'+l.back+'</button><button class="vwsb-btn vwsb-bs" onclick="VWSB.reset()">'+l.startOver+'</button>')}
+function render(){header();var s=st.step;if(s===STEP.LANG)rLang();else if(s===STEP.SVC)rSvc();else if(s===STEP.STATUS)rStatus();else if(s===STEP.OWNERS)rOwners();else if(s===STEP.TIMELINE)rTimeline();else if(s===STEP.CONTACT)rContact();else if(s===STEP.DONE)rDone()}
+function goTo(s){st.history.push(st.step);st.step=s;render()}function goBack(){if(st.history.length){st.step=st.history.pop();render()}}
+window.VWSB={open:function(){var o=el('vwsb-ov');if(o){o.classList.add('open');render()}},close:function(){var o=el('vwsb-ov');if(o)o.classList.remove('open')},ov:function(e){if(e.target.id==='vwsb-ov')this.close()},pick:function(k,v){st[k]=v;if(k==='lang'){render();schAdv(320);return}var s=['svc','status','owners','timeline'];if(s.indexOf(k)>=0){render();schAdv(280);return}render()},set:function(k,v){st[k]=v;if(k==='state')render()},next:function(){var s=st.step;if(s===STEP.LANG)goTo(STEP.SVC);else if(s===STEP.SVC&&st.svc)goTo(STEP.STATUS);else if(s===STEP.STATUS&&st.status)goTo(STEP.OWNERS);else if(s===STEP.OWNERS&&st.owners)goTo(STEP.TIMELINE);else if(s===STEP.TIMELINE&&st.timeline)goTo(STEP.CONTACT);else if(s===STEP.CONTACT){if(!st.name.trim()||!st.phone.trim()){var e=el('vwsb-form-err');if(e){e.textContent='⚠️ '+L().requiredErr;e.style.display='block';el('vwsb-body').scrollTop=0}return}goTo(STEP.DONE)}},back:goBack,openCal:function(){if(typeof Calendly!=='undefined'&&Calendly.initPopupWidget){Calendly.initPopupWidget({url:buildCal()})}else{window.open(buildCal(),'_blank')}},reset:function(){st={lang:st.lang,step:STEP.LANG,history:[],svc:null,status:null,owners:null,timeline:null,name:'',phone:'',email:'',state:'TX',otherState:'',hasEIN:false,hasBank:false,source:'',notes:''};render()}};
+})();
+</script>
+</body>
+</html>

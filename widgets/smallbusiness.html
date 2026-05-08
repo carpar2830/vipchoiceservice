@@ -300,6 +300,21 @@
   function L(){ return C[st.lang]; }
   function el(id){ return document.getElementById(id); }
 
+  // Escape user input before re-injecting into HTML (attribute or text context).
+  function esc(s){
+    return String(s == null ? '' : s)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+
+  // Single tracked timer for auto-advance so picks made in quick succession
+  // don't queue multiple advances (which would skip past required steps).
+  var _advanceTimer = null;
+  function scheduleAdvance(ms){
+    if(_advanceTimer){ clearTimeout(_advanceTimer); }
+    _advanceTimer = setTimeout(function(){ _advanceTimer = null; window.VWSB.next(); }, ms);
+  }
+
   function setBody(html){
     var b = el('vwsb-body'); if(!b) return;
     b.className = 'vwsb-mb'; b.innerHTML = html;
@@ -381,21 +396,21 @@
 
   function rContact(){
     var l = L(), sd = l.steps.contact, lab = l.labels;
-    var stateOpts = l.states.map(function(s){ return '<option value="'+s.v+'"'+(st.state===s.v?' selected':'')+'>'+s.lb+'</option>'; }).join('');
-    var sourceOpts = l.sources.map(function(s){ return '<option value="'+s.v+'"'+(st.source===s.v?' selected':'')+'>'+s.lb+'</option>'; }).join('');
+    var stateOpts = l.states.map(function(s){ return '<option value="'+esc(s.v)+'"'+(st.state===s.v?' selected':'')+'>'+esc(s.lb)+'</option>'; }).join('');
+    var sourceOpts = l.sources.map(function(s){ return '<option value="'+esc(s.v)+'"'+(st.source===s.v?' selected':'')+'>'+esc(s.lb)+'</option>'; }).join('');
     setBody(
       '<div class="vwsb-st">'+sd.title+'</div><div class="vwsb-ss">'+sd.sub+'</div>' +
       '<div id="vwsb-form-err" style="display:none" class="vwsb-err"></div>' +
       '<div class="vwsb-form-group"><label class="vwsb-form-label">'+lab.name+'<span class="vwsb-req">*</span></label>' +
-        '<input class="vwsb-form-input" type="text" placeholder="'+lab.name+'" value="'+st.name+'" oninput="VWSB.set(\'name\',this.value)"></div>' +
+        '<input class="vwsb-form-input" type="text" placeholder="'+esc(lab.name)+'" value="'+esc(st.name)+'" oninput="VWSB.set(\'name\',this.value)"></div>' +
       '<div class="vwsb-form-group"><label class="vwsb-form-label">'+lab.phone+'<span class="vwsb-req">*</span></label>' +
-        '<input class="vwsb-form-input" type="tel" placeholder="(555) 123-4567" value="'+st.phone+'" oninput="VWSB.set(\'phone\',this.value)"></div>' +
+        '<input class="vwsb-form-input" type="tel" placeholder="(555) 123-4567" value="'+esc(st.phone)+'" oninput="VWSB.set(\'phone\',this.value)"></div>' +
       '<div class="vwsb-form-group"><label class="vwsb-form-label">'+lab.email+'</label>' +
-        '<input class="vwsb-form-input" type="email" placeholder="you@email.com" value="'+st.email+'" oninput="VWSB.set(\'email\',this.value)"></div>' +
+        '<input class="vwsb-form-input" type="email" placeholder="you@email.com" value="'+esc(st.email)+'" oninput="VWSB.set(\'email\',this.value)"></div>' +
       '<div class="vwsb-form-group"><label class="vwsb-form-label">'+lab.state+'</label>' +
         '<select class="vwsb-form-sel" onchange="VWSB.set(\'state\',this.value)">'+stateOpts+'</select></div>' +
       (st.state==='OTHER' ? '<div class="vwsb-form-group"><label class="vwsb-form-label">'+lab.otherState+'</label>' +
-        '<input class="vwsb-form-input" type="text" placeholder="e.g. California" value="'+st.otherState+'" oninput="VWSB.set(\'otherState\',this.value)"></div>' : '') +
+        '<input class="vwsb-form-input" type="text" placeholder="e.g. California" value="'+esc(st.otherState)+'" oninput="VWSB.set(\'otherState\',this.value)"></div>' : '') +
       '<div class="vwsb-form-group"><label style="display:flex;align-items:center;gap:8px;font-size:13px;color:#475569;cursor:pointer;font-weight:500">' +
         '<input type="checkbox" '+(st.hasEIN?'checked':'')+' onchange="VWSB.set(\'hasEIN\',this.checked)" style="width:16px;height:16px;cursor:pointer">' +
         lab.hasEIN+'</label></div>' +
@@ -404,7 +419,7 @@
         lab.hasBank+'</label></div>' +
       '<div class="vwsb-form-group"><select class="vwsb-form-sel" onchange="VWSB.set(\'source\',this.value)">'+sourceOpts+'</select></div>' +
       '<div class="vwsb-form-group"><label class="vwsb-form-label">'+lab.notes+'</label>' +
-        '<textarea class="vwsb-form-input" rows="2" placeholder="..." oninput="VWSB.set(\'notes\',this.value)" style="resize:vertical;font-family:inherit">'+st.notes+'</textarea></div>'
+        '<textarea class="vwsb-form-input" rows="2" placeholder="..." oninput="VWSB.set(\'notes\',this.value)" style="resize:vertical;font-family:inherit">'+esc(st.notes)+'</textarea></div>'
     );
     setFoot('<button class="vwsb-btn vwsb-bs" onclick="VWSB.back()">'+l.back+'</button><button class="vwsb-btn vwsb-bg" onclick="VWSB.next()">'+l.next+'</button>');
   }
@@ -415,14 +430,14 @@
     var sourceLbl = st.source ? findLabel(l.sources, st.source) : '—';
     return '<div class="vwsb-summary">' +
       '<div class="vwsb-summary-t">'+l.summaryTitle+'</div>' +
-      '<div class="vwsb-summary-r"><span>'+l.svcLabel+'</span><span>'+findLabel(l.svcs,st.svc)+'</span></div>' +
-      '<div class="vwsb-summary-r"><span>'+l.statusLabel+'</span><span>'+findLabel(l.statuses,st.status)+'</span></div>' +
-      '<div class="vwsb-summary-r"><span>'+l.ownersLabel+'</span><span>'+findLabel(l.ownerOpts,st.owners)+'</span></div>' +
-      '<div class="vwsb-summary-r"><span>'+l.timelineLabel+'</span><span>'+findLabel(l.timelines,st.timeline)+'</span></div>' +
-      '<div class="vwsb-summary-r"><span>'+l.stateLabel+'</span><span>'+stateLbl+'</span></div>' +
+      '<div class="vwsb-summary-r"><span>'+l.svcLabel+'</span><span>'+esc(findLabel(l.svcs,st.svc))+'</span></div>' +
+      '<div class="vwsb-summary-r"><span>'+l.statusLabel+'</span><span>'+esc(findLabel(l.statuses,st.status))+'</span></div>' +
+      '<div class="vwsb-summary-r"><span>'+l.ownersLabel+'</span><span>'+esc(findLabel(l.ownerOpts,st.owners))+'</span></div>' +
+      '<div class="vwsb-summary-r"><span>'+l.timelineLabel+'</span><span>'+esc(findLabel(l.timelines,st.timeline))+'</span></div>' +
+      '<div class="vwsb-summary-r"><span>'+l.stateLabel+'</span><span>'+esc(stateLbl)+'</span></div>' +
       '<div class="vwsb-summary-r"><span>'+l.einLabel+'</span><span>'+(st.hasEIN?l.yes:l.no)+'</span></div>' +
       '<div class="vwsb-summary-r"><span>'+l.bankLabel+'</span><span>'+(st.hasBank?l.yes:l.no)+'</span></div>' +
-      (st.source?'<div class="vwsb-summary-r"><span>'+l.sourceLabel+'</span><span>'+sourceLbl+'</span></div>':'') +
+      (st.source?'<div class="vwsb-summary-r"><span>'+l.sourceLabel+'</span><span>'+esc(sourceLbl)+'</span></div>':'') +
     '</div>';
   }
 
@@ -498,20 +513,9 @@
 
     pick: function(key, val){
       st[key] = val;
-      if(key==='lang'){
-        render();
-        var self = this;
-        setTimeout(function(){ self.next(); }, 320);
-        return;
-      }
-      // auto-advance for single-select question screens
+      if(key==='lang'){ render(); scheduleAdvance(320); return; }
       var single = ['svc','status','owners','timeline'];
-      if(single.indexOf(key) >= 0){
-        render();
-        var self2 = this;
-        setTimeout(function(){ self2.next(); }, 280);
-        return;
-      }
+      if(single.indexOf(key) >= 0){ render(); scheduleAdvance(280); return; }
       render();
     },
 
@@ -519,11 +523,11 @@
 
     next: function(){
       var s = st.step;
-      if(s===STEP.LANG)          goTo(STEP.SVC);
-      else if(s===STEP.SVC)      goTo(STEP.STATUS);
-      else if(s===STEP.STATUS)   goTo(STEP.OWNERS);
-      else if(s===STEP.OWNERS)   goTo(STEP.TIMELINE);
-      else if(s===STEP.TIMELINE) goTo(STEP.CONTACT);
+      if(s===STEP.LANG)                       goTo(STEP.SVC);
+      else if(s===STEP.SVC      && st.svc)      goTo(STEP.STATUS);
+      else if(s===STEP.STATUS   && st.status)   goTo(STEP.OWNERS);
+      else if(s===STEP.OWNERS   && st.owners)   goTo(STEP.TIMELINE);
+      else if(s===STEP.TIMELINE && st.timeline) goTo(STEP.CONTACT);
       else if(s===STEP.CONTACT){
         if(!st.name.trim() || !st.phone.trim()){
           var e = el('vwsb-form-err');
