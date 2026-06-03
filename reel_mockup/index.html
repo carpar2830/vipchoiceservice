@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VIP Choice Service — Reel Mockup</title>
+<style>
+  :root{
+    --gold:#d4af37;
+    --gold-soft:#f1d77a;
+    --ink:#0d1117;
+    --ink-2:#161b22;
+    --paper:#f7f5ef;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:28px;
+    padding:40px 16px;
+    color:var(--paper);
+    background:
+      radial-gradient(1200px 600px at 80% -10%, #1c2230 0%, transparent 60%),
+      radial-gradient(900px 500px at 10% 110%, #20180a 0%, transparent 55%),
+      linear-gradient(160deg,#070a0f 0%, #0d1117 55%, #11151c 100%);
+  }
+
+  .headline{
+    text-align:center;
+    max-width:560px;
+  }
+  .headline h1{
+    font-size:clamp(22px,4vw,32px);
+    letter-spacing:.5px;
+    font-weight:700;
+  }
+  .headline h1 span{color:var(--gold)}
+  .headline p{
+    margin-top:8px;
+    color:#9aa4b2;
+    font-size:14px;
+  }
+
+  /* ---------- Phone frame ---------- */
+  .phone{
+    position:relative;
+    width:330px;
+    height:680px;
+    border-radius:46px;
+    padding:14px;
+    background:linear-gradient(145deg,#2a2f3a,#0a0d12);
+    box-shadow:
+      0 0 0 2px rgba(212,175,55,.25),
+      0 40px 80px -20px rgba(0,0,0,.8),
+      inset 0 0 0 2px rgba(255,255,255,.04);
+  }
+  .notch{
+    position:absolute;
+    top:18px;left:50%;
+    transform:translateX(-50%);
+    width:120px;height:26px;
+    background:#05070a;
+    border-radius:0 0 16px 16px;
+    z-index:6;
+  }
+  .screen{
+    position:relative;
+    width:100%;height:100%;
+    border-radius:34px;
+    overflow:hidden;
+    background:#000;
+  }
+
+  /* ---------- Reel slides ---------- */
+  .reel{position:absolute;inset:0}
+  .slide{
+    position:absolute;inset:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:34px 26px;
+    opacity:0;
+    transform:scale(1.05);
+    animation:cycle 16s infinite;
+  }
+  .slide .kicker{
+    font-size:12px;letter-spacing:3px;text-transform:uppercase;
+    color:var(--gold-soft);margin-bottom:14px;
+  }
+  .slide h2{
+    font-size:30px;line-height:1.15;font-weight:800;
+    text-shadow:0 2px 18px rgba(0,0,0,.6);
+  }
+  .slide h2 b{color:var(--gold)}
+  .slide p{margin-top:14px;font-size:15px;color:#e7e3d8;max-width:240px}
+
+  .slide:nth-child(1){animation-delay:0s;background:linear-gradient(160deg,#13233f,#0a1322)}
+  .slide:nth-child(2){animation-delay:4s;background:linear-gradient(160deg,#1f1605,#0d0a04)}
+  .slide:nth-child(3){animation-delay:8s;background:linear-gradient(160deg,#0c2a23,#06120e)}
+  .slide:nth-child(4){animation-delay:12s;background:linear-gradient(160deg,#241027,#0e0613)}
+
+  @keyframes cycle{
+    0%   {opacity:0;transform:scale(1.06)}
+    3%   {opacity:1;transform:scale(1)}
+    22%  {opacity:1;transform:scale(1.02)}
+    25%  {opacity:0;transform:scale(1.05)}
+    100% {opacity:0}
+  }
+
+  .emoji{font-size:54px;margin-bottom:10px;filter:drop-shadow(0 6px 14px rgba(0,0,0,.5))}
+
+  /* ---------- Overlay UI (IG-style) ---------- */
+  .topbar{
+    position:absolute;top:46px;left:16px;right:16px;
+    display:flex;justify-content:space-between;align-items:center;
+    z-index:5;font-size:14px;font-weight:600;
+  }
+  .topbar .reels-label{display:flex;align-items:center;gap:6px}
+  .progress{
+    position:absolute;top:40px;left:16px;right:16px;
+    height:3px;display:flex;gap:5px;z-index:5;
+  }
+  .progress span{flex:1;background:rgba(255,255,255,.3);border-radius:3px;overflow:hidden}
+  .progress span::after{
+    content:"";display:block;height:100%;width:0;background:#fff;
+    animation:bar 16s infinite;
+  }
+  .progress span:nth-child(1)::after{animation-delay:0s}
+  .progress span:nth-child(2)::after{animation-delay:4s}
+  .progress span:nth-child(3)::after{animation-delay:8s}
+  .progress span:nth-child(4)::after{animation-delay:12s}
+  @keyframes bar{0%{width:0}25%{width:100%}25.01%{width:100%}100%{width:100%}}
+
+  .rail{
+    position:absolute;right:14px;bottom:120px;z-index:5;
+    display:flex;flex-direction:column;gap:22px;align-items:center;
+  }
+  .rail button{
+    background:none;border:none;color:#fff;cursor:pointer;
+    display:flex;flex-direction:column;align-items:center;gap:4px;
+    font-size:11px;
+  }
+  .rail .ic{
+    width:30px;height:30px;display:grid;place-items:center;
+    font-size:22px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.6));
+  }
+
+  .caption{
+    position:absolute;left:16px;right:64px;bottom:26px;z-index:5;
+  }
+  .handle{display:flex;align-items:center;gap:8px;font-weight:700;font-size:14px}
+  .handle .avatar{
+    width:32px;height:32px;border-radius:50%;
+    background:linear-gradient(135deg,var(--gold),#8a6d12);
+    display:grid;place-items:center;font-size:13px;color:#0d1117;font-weight:800;
+    box-shadow:0 0 0 2px #fff2;
+  }
+  .handle .follow{
+    margin-left:6px;font-size:11px;font-weight:600;
+    border:1px solid #fff;border-radius:6px;padding:3px 10px;
+  }
+  .caption p{margin-top:8px;font-size:12.5px;line-height:1.45;color:#f3f1ea}
+  .caption .tags{color:#cfe3ff;margin-top:4px;font-size:12px}
+
+  .cta-pill{
+    position:absolute;bottom:0;left:0;right:0;z-index:6;
+    background:linear-gradient(0deg,#000 30%,transparent);
+    padding:18px 16px 14px;
+    display:flex;justify-content:center;
+  }
+  .cta-pill a{
+    text-decoration:none;
+    background:var(--gold);color:#0d1117;font-weight:800;
+    padding:11px 22px;border-radius:999px;font-size:14px;letter-spacing:.3px;
+    box-shadow:0 8px 24px -6px rgba(212,175,55,.6);
+  }
+
+  /* ---------- Footer note ---------- */
+  .note{color:#5d6675;font-size:12px;text-align:center;max-width:420px}
+  .note code{color:#9aa4b2}
+</style>
+</head>
+<body>
+
+  <div class="headline">
+    <h1><span>VIP Choice Service</span> — Instagram Reel Mockup</h1>
+    <p>Tax Prep · Bookkeeping · Notary · Business Services — Dallas, TX</p>
+  </div>
+
+  <div class="phone">
+    <div class="notch"></div>
+    <div class="screen">
+
+      <!-- progress bars -->
+      <div class="progress"><span></span><span></span><span></span><span></span></div>
+
+      <!-- top bar -->
+      <div class="topbar">
+        <div class="reels-label">▶ Reels</div>
+        <div>📷</div>
+      </div>
+
+      <!-- slides -->
+      <div class="reel">
+        <div class="slide">
+          <div class="emoji">💸</div>
+          <div class="kicker">Tax Season 2026</div>
+          <h2>Get your <b>maximum refund</b> — fast.</h2>
+          <p>Expert prep that finds every deduction you deserve.</p>
+        </div>
+        <div class="slide">
+          <div class="emoji">📚</div>
+          <div class="kicker">Bookkeeping</div>
+          <h2>Books a mess? <b>We've got you.</b></h2>
+          <p>Clean, organized records so you can run your business.</p>
+        </div>
+        <div class="slide">
+          <div class="emoji">🖊️</div>
+          <div class="kicker">Mobile Notary</div>
+          <h2>We come to <b>you.</b></h2>
+          <p>Documents signed & sealed wherever you are in Dallas.</p>
+        </div>
+        <div class="slide">
+          <div class="emoji">🚀</div>
+          <div class="kicker">Business Services</div>
+          <h2>Launch your <b>LLC</b> today.</h2>
+          <p>From formation to filing — start strong with VIP Choice.</p>
+        </div>
+      </div>
+
+      <!-- right action rail -->
+      <div class="rail">
+        <button><span class="ic">❤️</span>2.4k</button>
+        <button><span class="ic">💬</span>318</button>
+        <button><span class="ic">↪️</span>Share</button>
+        <button><span class="ic">⋯</span></button>
+      </div>
+
+      <!-- caption -->
+      <div class="caption">
+        <div class="handle">
+          <span class="avatar">VIP</span>
+          vipchoiceservice
+          <span class="follow">Follow</span>
+        </div>
+        <p>Dallas' choice for stress-free taxes & smart money moves. 🟡 Book your free consult today!</p>
+        <div class="tags">#DallasTax #Bookkeeping #Notary #SmallBusiness #TaxRefund</div>
+      </div>
+
+      <!-- CTA -->
+      <div class="cta-pill"><a href="#">📅 Book a Free Consult</a></div>
+
+    </div>
+  </div>
+
+  <p class="note">
+    Self-contained mockup — just open <code>reel_mockup/index.html</code> in any browser.
+    Swap the slide text, emojis, handle, and CTA link to fit any campaign.
+  </p>
+
+</body>
+</html>
