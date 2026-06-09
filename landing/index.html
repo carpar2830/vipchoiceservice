@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VIP Choice Service — Tax, Bookkeeping, Notary & Business Services | Dallas, TX</title>
+<meta name="description" content="Dallas tax prep, bookkeeping, notary, and business setup. Book your free 15-minute consultation today and keep more of your money." />
+<style>
+  :root{--gold:#d4af37;--gold-d:#b8962b;--ink:#0d1117;--ink2:#161b22;--paper:#f7f5ef;--muted:#5a6472;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);background:var(--paper);line-height:1.55}
+  a{color:inherit}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+
+  /* nav */
+  header{position:sticky;top:0;z-index:50;background:rgba(13,17,23,.92);backdrop-filter:blur(8px);color:#fff}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800}
+  .logo .b{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
+    background:linear-gradient(135deg,var(--gold),#8a6d12);color:#0d1117;font-size:12px;font-weight:800}
+  .nav a.cta{background:var(--gold);color:#0d1117;font-weight:800;padding:9px 18px;border-radius:999px;text-decoration:none;font-size:14px}
+
+  /* hero */
+  .hero{position:relative;color:#fff;overflow:hidden;
+    background:radial-gradient(900px 500px at 85% -10%,#1c2230,transparent 60%),
+      radial-gradient(700px 400px at 0% 120%,#20180a,transparent 55%),
+      linear-gradient(160deg,#0a0e14,#0d1117 60%,#11151c)}
+  .hero .wrap{padding:70px 22px 80px;display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center}
+  .eyebrow{color:var(--gold);font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:13px}
+  .hero h1{font-size:clamp(34px,6vw,56px);line-height:1.05;font-weight:900;margin:14px 0}
+  .hero h1 span{color:var(--gold)}
+  .hero p.lead{font-size:18px;color:#c9cfd9;max-width:540px}
+  .hero .btns{margin-top:26px;display:flex;gap:14px;flex-wrap:wrap}
+  .btn{display:inline-block;text-decoration:none;font-weight:800;border-radius:999px;padding:14px 28px;font-size:16px}
+  .btn.gold{background:var(--gold);color:#0d1117;box-shadow:0 12px 30px -8px rgba(212,175,55,.6)}
+  .btn.outline{border:1.5px solid #ffffff66;color:#fff}
+  .trustline{margin-top:20px;font-size:14px;color:#9aa4b2}
+  .trustline b{color:var(--gold)}
+
+  /* hero card / form */
+  .card{background:#fff;color:var(--ink);border-radius:18px;padding:26px;box-shadow:0 30px 70px -20px rgba(0,0,0,.55)}
+  .card h3{font-size:20px;margin-bottom:4px}
+  .card .small{color:var(--muted);font-size:13px;margin-bottom:16px}
+  .field{margin-bottom:12px}
+  .field label{display:block;font-size:13px;font-weight:600;margin-bottom:5px}
+  .field input,.field select{width:100%;padding:12px 13px;border:1px solid #d8d4c8;border-radius:10px;font-size:15px;font-family:inherit}
+  .card button{width:100%;margin-top:6px;background:var(--gold);color:#0d1117;font-weight:800;
+    border:none;padding:14px;border-radius:999px;font-size:16px;cursor:pointer}
+  .card button:hover{background:var(--gold-d)}
+  .card .fineprint{font-size:11px;color:var(--muted);text-align:center;margin-top:10px}
+
+  /* services */
+  section{padding:64px 0}
+  .sec-head{text-align:center;max-width:620px;margin:0 auto 38px}
+  .sec-head .eyebrow{color:var(--gold-d)}
+  .sec-head h2{font-size:clamp(26px,4vw,36px);font-weight:900;margin-top:8px}
+  .sec-head p{color:var(--muted);margin-top:8px}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .svc{background:#fff;border:1px solid #ece8db;border-radius:16px;padding:24px;transition:transform .15s,box-shadow .2s}
+  .svc:hover{transform:translateY(-4px);box-shadow:0 18px 40px -16px rgba(0,0,0,.25)}
+  .svc .ic{font-size:34px}
+  .svc h4{margin:12px 0 6px;font-size:18px}
+  .svc p{font-size:14px;color:var(--muted)}
+
+  /* why us */
+  .why{background:var(--ink);color:#fff}
+  .why .grid{grid-template-columns:repeat(3,1fr)}
+  .why .item{padding:8px}
+  .why .item .ic{font-size:28px;color:var(--gold)}
+  .why .item h4{margin:10px 0 6px}
+  .why .item p{color:#9aa4b2;font-size:14px}
+
+  /* steps */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;counter-reset:s}
+  .step{position:relative;background:#fff;border:1px solid #ece8db;border-radius:16px;padding:26px 22px}
+  .step::before{counter-increment:s;content:counter(s);position:absolute;top:-16px;left:22px;
+    width:36px;height:36px;border-radius:50%;background:var(--gold);color:#0d1117;font-weight:900;display:grid;place-items:center}
+  .step h4{margin:14px 0 6px}
+  .step p{color:var(--muted);font-size:14px}
+
+  /* final cta */
+  .final{background:linear-gradient(160deg,#13233f,#0d0a04);color:#fff;text-align:center}
+  .final h2{font-size:clamp(26px,4vw,40px);font-weight:900}
+  .final p{color:#c9cfd9;margin:12px auto 24px;max-width:560px}
+
+  footer{background:#0a0d12;color:#9aa4b2;padding:34px 0;font-size:14px}
+  footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  footer a{color:var(--gold);text-decoration:none}
+
+  @media(max-width:840px){
+    .hero .wrap{grid-template-columns:1fr}
+    .grid,.why .grid,.steps{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:560px){
+    .grid,.why .grid,.steps{grid-template-columns:1fr}
+    .nav a.cta{display:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="logo"><span class="b">VIP</span> VIP Choice Service</div>
+    <a href="#book" class="cta">Free Consult</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Dallas, TX</div>
+      <h1>Stop <span>overpaying</span> the IRS.</h1>
+      <p class="lead">Taxes, bookkeeping, notary, and business setup — handled by a local team
+        that actually picks up the phone. Keep more of your money and lose the stress.</p>
+      <div class="btns">
+        <a href="#book" class="btn gold">📅 Book a Free Consult</a>
+        <a href="#services" class="btn outline">See Services</a>
+      </div>
+      <div class="trustline">⭐⭐⭐⭐⭐ Trusted by your Dallas neighbors · <b>Free 15-min consult</b></div>
+    </div>
+
+    <!-- LEAD FORM -->
+    <div class="card" id="book">
+      <h3>Claim your free consultation</h3>
+      <div class="small">No pressure — just a clear plan. Limited spots this month.</div>
+      <form id="leadForm">
+        <div class="field"><label>Full name</label><input required name="name" placeholder="Jane Smith" /></div>
+        <div class="field"><label>Phone</label><input required name="phone" type="tel" placeholder="(214) 555-0123" /></div>
+        <div class="field"><label>Email</label><input required name="email" type="email" placeholder="you@email.com" /></div>
+        <div class="field"><label>What do you need help with?</label>
+          <select name="need">
+            <option>Tax preparation</option>
+            <option>Bookkeeping</option>
+            <option>Notary</option>
+            <option>Business / LLC setup</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+        <button type="submit">Get My Free Consult →</button>
+        <div class="fineprint">We'll reach out within one business day. Your info stays private.</div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">What we do</div>
+      <h2>Everything in one trusted place</h2>
+      <p>One local team for your taxes, your books, and your business — no juggling vendors.</p>
+    </div>
+    <div class="grid">
+      <div class="svc"><div class="ic">💸</div><h4>Tax Preparation</h4><p>Maximize your refund and stay compliant. Individual &amp; business returns.</p></div>
+      <div class="svc"><div class="ic">📚</div><h4>Bookkeeping</h4><p>Clean, organized books so you always know where your money stands.</p></div>
+      <div class="svc"><div class="ic">🖊️</div><h4>Notary</h4><p>Documents signed &amp; sealed — mobile service across the Dallas area.</p></div>
+      <div class="svc"><div class="ic">🚀</div><h4>Business Setup</h4><p>LLC formation, EIN, and filings to launch your business the right way.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why">
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow" style="color:var(--gold)">Why VIP Choice</div>
+      <h2>Local, friendly, on your side</h2></div>
+    <div class="grid">
+      <div class="item"><div class="ic">📍</div><h4>Truly local</h4><p>Dallas-based and here year-round — not a faceless app or a seasonal pop-up.</p></div>
+      <div class="item"><div class="ic">📞</div><h4>Real people</h4><p>Call or message and reach a human who knows your situation.</p></div>
+      <div class="item"><div class="ic">💵</div><h4>Save more</h4><p>We find the deductions and savings most people miss — every year.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- STEPS -->
+<section>
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow">How it works</div><h2>Get started in 3 easy steps</h2></div>
+    <div class="steps">
+      <div class="step"><h4>Book your free consult</h4><p>Fill the quick form — it takes under a minute.</p></div>
+      <div class="step"><h4>Talk through your needs</h4><p>We listen and build a clear, no-pressure plan.</p></div>
+      <div class="step"><h4>Keep more of your money</h4><p>We handle the rest while you focus on what matters.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final">
+  <div class="wrap">
+    <h2>Ready to keep more of your money?</h2>
+    <p>Book your free 15-minute consultation today. Spots are limited each month.</p>
+    <a href="#book" class="btn gold">📅 Book My Free Consult</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div><strong style="color:#f7f5ef">VIP Choice Service</strong><br>Tax · Bookkeeping · Notary · Business · Dallas, TX</div>
+    <div>
+      📞 <a href="tel:+10000000000">Add your phone</a> ·
+      ✉️ <a href="mailto:hello@example.com">Add your email</a><br>
+      <span style="color:#5a6472">© 2026 VIP Choice Service. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Demo form handler — replace with your real form action / CRM / email service.
+  document.getElementById('leadForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const f = new FormData(this);
+    alert("Thanks, " + (f.get('name')||'') + "! We'll reach out within one business day.\n\n(Connect this form to your email/CRM to capture leads for real.)");
+    this.reset();
+  });
+</script>
+</body>
+</html>
