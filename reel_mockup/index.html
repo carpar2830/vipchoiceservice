@@ -182,6 +182,14 @@
     box-shadow:0 8px 24px -6px rgba(212,175,55,.6);
   }
 
+  .sound-btn{
+    background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.25);
+    color:#fff;font-size:15px;line-height:1;cursor:pointer;
+    width:30px;height:30px;border-radius:50%;display:grid;place-items:center;
+    backdrop-filter:blur(4px);transition:transform .15s ease,background .2s ease;
+  }
+  .sound-btn:hover{transform:scale(1.08);background:rgba(212,175,55,.4)}
+
   /* ---------- Footer note ---------- */
   .note{color:#5d6675;font-size:12px;text-align:center;max-width:420px}
   .note code{color:#9aa4b2}
@@ -204,7 +212,7 @@
       <!-- top bar -->
       <div class="topbar">
         <div class="reels-label">▶ Reels</div>
-        <div>📷</div>
+        <button id="soundToggle" class="sound-btn" aria-label="Toggle music">🔇</button>
       </div>
 
       <!-- slides -->
@@ -263,7 +271,86 @@
   <p class="note">
     Self-contained mockup — just open <code>reel_mockup/index.html</code> in any browser.
     Swap the slide text, emojis, handle, and CTA link to fit any campaign.
+    Tap the speaker icon for a soft, evolving "healing" soundbed (off by default).
   </p>
+
+<script>
+/* ------------------------------------------------------------------
+   Gentle, evolving "healing" soundbed.
+   - Generated live with the Web Audio API (no audio files, no loop).
+   - Soft sine pads + slow chord variation so it never gets repetitive.
+   - Kept low in the mix so it never competes with the ad.
+   - Off by default; browsers block autoplay-with-sound, so it starts
+     only when the user taps the speaker toggle.
+------------------------------------------------------------------- */
+(function(){
+  const btn = document.getElementById('soundToggle');
+  let ctx, master, on = false, timer;
+
+  // A warm, calming set of chords (Hz) the pad slowly drifts between.
+  const chords = [
+    [220.00, 277.18, 329.63],   // A major-ish
+    [196.00, 246.94, 293.66],   // G
+    [174.61, 220.00, 261.63],   // F
+    [261.63, 329.63, 392.00],   // C, lifted
+    [233.08, 293.66, 349.23]    // Bb, gentle resolve
+  ];
+  let voices = [];
+
+  function makeVoice(freq){
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.value = freq;
+    // slow, subtle detune drift keeps each note alive instead of static
+    const lfo = ctx.createOscillator();
+    const lfoGain = ctx.createGain();
+    lfo.frequency.value = 0.05 + Math.random() * 0.08;
+    lfoGain.gain.value = 1.5;
+    lfo.connect(lfoGain).connect(osc.frequency);
+    gain.gain.value = 0;
+    osc.connect(gain).connect(master);
+    osc.start(); lfo.start();
+    return {osc, gain, lfo};
+  }
+
+  // Slowly cross-fade to a new chord every ~7s → constant gentle variation.
+  function evolve(){
+    const chord = chords[Math.floor(Math.random() * chords.length)];
+    const now = ctx.currentTime;
+    voices.forEach((v, i) => {
+      const target = chord[i % chord.length] * (i < 3 ? 1 : 2);
+      v.osc.frequency.setTargetAtTime(target, now, 2.0);
+      // soft swell, each voice at a low level
+      v.gain.gain.setTargetAtTime(0.05 + Math.random() * 0.03, now, 2.5);
+    });
+    timer = setTimeout(evolve, 6500 + Math.random() * 2500);
+  }
+
+  function start(){
+    ctx = new (window.AudioContext || window.webkitAudioContext)();
+    master = ctx.createGain();
+    master.gain.value = 0.0;
+    master.connect(ctx.destination);
+    voices = [0,1,2,3].map(() => makeVoice(220));
+    // gentle fade-in of the whole bed
+    master.gain.setTargetAtTime(0.5, ctx.currentTime, 1.5);
+    evolve();
+  }
+
+  function stop(){
+    clearTimeout(timer);
+    if (master) master.gain.setTargetAtTime(0, ctx.currentTime, 0.6);
+    setTimeout(() => { if (ctx) ctx.close(); ctx = null; }, 900);
+  }
+
+  btn.addEventListener('click', () => {
+    on = !on;
+    btn.textContent = on ? '🔊' : '🔇';
+    on ? start() : stop();
+  });
+})();
+</script>
 
 </body>
 </html>
