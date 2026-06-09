@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VIP Choice Service — Downloadable Facebook Ad (1:1)</title>
+<style>
+  :root{--gold:#d4af37;--paper:#f7f5ef;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    min-height:100vh;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;gap:20px;padding:32px 16px;color:var(--paper);
+    background:
+      radial-gradient(1100px 600px at 80% -10%,#1c2230 0,transparent 60%),
+      radial-gradient(900px 500px at 10% 110%,#20180a 0,transparent 55%),
+      linear-gradient(160deg,#070a0f 0%,#0d1117 55%,#11151c 100%);
+  }
+  .headline{text-align:center;max-width:560px}
+  .headline h1{font-size:clamp(20px,4vw,28px);font-weight:700}
+  .headline h1 span{color:var(--gold)}
+  .headline p{margin-top:6px;color:#9aa4b2;font-size:13px}
+
+  canvas{
+    width:460px;max-width:90vw;height:auto;border-radius:18px;
+    box-shadow:0 30px 70px -20px rgba(0,0,0,.8),0 0 0 1px rgba(212,175,55,.25);
+  }
+  .actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+  .btn{
+    cursor:pointer;border:none;text-decoration:none;font-weight:800;font-size:15px;
+    padding:13px 26px;border-radius:999px;letter-spacing:.3px;
+  }
+  .btn.gold{background:var(--gold);color:#0d1117;box-shadow:0 10px 28px -6px rgba(212,175,55,.6)}
+  .btn.ghost{background:rgba(255,255,255,.06);color:#f3efe2;border:1px solid rgba(255,255,255,.2)}
+  .note{color:#5d6675;font-size:12px;text-align:center;max-width:460px;line-height:1.5}
+  .note code{color:#9aa4b2}
+</style>
+</head>
+<body>
+
+  <div class="headline">
+    <h1><span>VIP Choice Service</span> — Downloadable Ad (1080×1080)</h1>
+    <p>Click download, then upload the PNG straight into Facebook Ads Manager</p>
+  </div>
+
+  <canvas id="ad" width="1080" height="1080" aria-label="VIP Choice Service ad"></canvas>
+
+  <div class="actions">
+    <button id="download" class="btn gold">⬇ Download PNG</button>
+  </div>
+
+  <p class="note">
+    Real 1080×1080 image — Facebook's recommended square size. Edit the
+    <code>CONFIG</code> block at the top of this file's script to change the
+    business name, headline, services, offer, and colors, then re-download.
+  </p>
+
+<script>
+/* =======================================================================
+   EDIT ME — change any of these and re-download.
+   ======================================================================= */
+const CONFIG = {
+  business:  "VIP Choice Service",
+  badge:     "VIP",
+  location:  "Dallas, TX",
+  kicker:    "DALLAS, TX",
+  // headline words; set gold:true to highlight a word in gold
+  headline: [
+    {t:"Stop ",      gold:false},
+    {t:"overpaying", gold:true },
+    {t:" the IRS.",  gold:false}
+  ],
+  sub:       "Taxes, bookkeeping, notary & business setup — done right, all in one place.",
+  services:  ["Tax Prep", "Bookkeeping", "Notary", "LLC Setup"],
+  offerLine1:"FREE 15-min consult",
+  offerLine2:"Limited spots this month",
+  cta:       "Book Now",
+  gold:      "#d4af37"
+};
+/* ===================================================================== */
+
+const cv = document.getElementById('ad');
+const x  = cv.getContext('2d');
+const W = 1080, H = 1080, PAD = 70;
+
+function rr(g, rx, ry, rw, rh, r){
+  g.beginPath();
+  g.moveTo(rx+r, ry);
+  g.arcTo(rx+rw, ry,   rx+rw, ry+rh, r);
+  g.arcTo(rx+rw, ry+rh, rx,    ry+rh, r);
+  g.arcTo(rx,    ry+rh, rx,    ry,    r);
+  g.arcTo(rx,    ry,    rx+rw, ry,    r);
+  g.closePath();
+}
+
+function draw(){
+  // background
+  const bg = x.createLinearGradient(0, 0, W, H);
+  bg.addColorStop(0, "#13233f");
+  bg.addColorStop(0.55, "#0a1322");
+  bg.addColorStop(1, "#0d0a04");
+  x.fillStyle = bg; x.fillRect(0,0,W,H);
+
+  // gold glow top-right
+  const glow = x.createRadialGradient(W-120, 90, 0, W-120, 90, 360);
+  glow.addColorStop(0, "rgba(212,175,55,0.22)");
+  glow.addColorStop(1, "rgba(212,175,55,0)");
+  x.fillStyle = glow; x.fillRect(0,0,W,H);
+
+  // ---- top row: avatar + business + sponsored ----
+  const avX = PAD, avY = PAD, avR = 46;
+  const ag = x.createLinearGradient(avX, avY, avX+avR*2, avY+avR*2);
+  ag.addColorStop(0, CONFIG.gold); ag.addColorStop(1, "#8a6d12");
+  x.beginPath(); x.arc(avX+avR, avY+avR, avR, 0, Math.PI*2); x.fillStyle = ag; x.fill();
+  x.fillStyle = "#0d1117"; x.font = "800 30px Segoe UI, Arial";
+  x.textAlign = "center"; x.textBaseline = "middle";
+  x.fillText(CONFIG.badge, avX+avR, avY+avR+1);
+
+  x.textAlign = "left"; x.textBaseline = "alphabetic";
+  x.fillStyle = "#f7f5ef"; x.font = "700 34px Segoe UI, Arial";
+  x.fillText(CONFIG.business, avX+avR*2+22, avY+38);
+  x.fillStyle = "#9aa4b2"; x.font = "400 25px Segoe UI, Arial";
+  x.fillText("Sponsored · " + CONFIG.location, avX+avR*2+22, avY+74);
+
+  // ---- body (vertically centered area) ----
+  let cy = 470;
+  // kicker
+  x.fillStyle = "#f1d77a"; x.font = "700 27px Segoe UI, Arial";
+  if (x.letterSpacing !== undefined) x.letterSpacing = "5px";
+  x.fillText(CONFIG.kicker, PAD, cy);
+  if (x.letterSpacing !== undefined) x.letterSpacing = "0px";
+
+  // headline (mixed color), up to two lines, auto-wrap by word
+  cy += 30;
+  x.font = "900 92px Segoe UI, Arial";
+  const lineH = 96, maxW = W - PAD*2;
+  // build word tokens preserving color
+  let tokens = [];
+  CONFIG.headline.forEach(seg => {
+    seg.t.split(/(\s+)/).forEach(w => { if (w.length) tokens.push({t:w, gold:seg.gold}); });
+  });
+  let line = [], lines = [], lineWidth = 0;
+  tokens.forEach(tok => {
+    const w = x.measureText(tok.t).width;
+    if (lineWidth + w > maxW && line.length) { lines.push(line); line = []; lineWidth = 0; }
+    line.push(tok); lineWidth += w;
+  });
+  if (line.length) lines.push(line);
+  let hy = cy + 70;
+  lines.forEach(ln => {
+    let lx = PAD;
+    ln.forEach(tok => {
+      x.fillStyle = tok.gold ? CONFIG.gold : "#ffffff";
+      x.fillText(tok.t, lx, hy);
+      lx += x.measureText(tok.t).width;
+    });
+    hy += lineH;
+  });
+
+  // sub text (wrapped)
+  x.fillStyle = "#ece8dc"; x.font = "400 33px Segoe UI, Arial";
+  let sy = hy + 8;
+  const words = CONFIG.sub.split(" ");
+  let l = "";
+  words.forEach(wd => {
+    const test = l ? l + " " + wd : wd;
+    if (x.measureText(test).width > maxW - 60 && l) { x.fillText(l, PAD, sy); l = wd; sy += 44; }
+    else l = test;
+  });
+  if (l) { x.fillText(l, PAD, sy); }
+
+  // ---- service pills ----
+  let py = sy + 56, px = PAD;
+  x.font = "600 27px Segoe UI, Arial";
+  CONFIG.services.forEach(s => {
+    const tw = x.measureText(s).width, pw = tw + 44, ph = 52;
+    if (px + pw > W - PAD) { px = PAD; py += ph + 16; }
+    rr(x, px, py, pw, ph, ph/2);
+    x.fillStyle = "rgba(255,255,255,0.08)"; x.fill();
+    x.lineWidth = 2; x.strokeStyle = "rgba(212,175,55,0.5)"; x.stroke();
+    x.fillStyle = "#f3efe2"; x.textBaseline = "middle";
+    x.fillText(s, px + 22, py + ph/2 + 1);
+    x.textBaseline = "alphabetic";
+    px += pw + 14;
+  });
+
+  // ---- footer: offer (left) + CTA (right) ----
+  const fy = H - PAD - 36;
+  x.fillStyle = "#cfd5df"; x.font = "700 27px Segoe UI, Arial";
+  x.fillText("🟡 " + CONFIG.offerLine1, PAD, fy - 18);
+  x.fillStyle = "#9aa4b2"; x.font = "400 24px Segoe UI, Arial";
+  x.fillText(CONFIG.offerLine2, PAD, fy + 18);
+
+  // CTA pill
+  x.font = "800 32px Segoe UI, Arial";
+  const ctw = x.measureText(CONFIG.cta).width, cpw = ctw + 70, cph = 78;
+  const cpx = W - PAD - cpw, cpy = H - PAD - cph;
+  rr(x, cpx, cpy, cpw, cph, cph/2);
+  x.fillStyle = CONFIG.gold; x.fill();
+  x.fillStyle = "#0d1117"; x.textAlign = "center"; x.textBaseline = "middle";
+  x.fillText(CONFIG.cta, cpx + cpw/2, cpy + cph/2 + 1);
+  x.textAlign = "left"; x.textBaseline = "alphabetic";
+}
+
+draw();
+
+document.getElementById('download').addEventListener('click', () => {
+  const a = document.createElement('a');
+  a.download = 'vip-choice-facebook-ad-1080.png';
+  a.href = cv.toDataURL('image/png');
+  a.click();
+});
+</script>
+</body>
+</html>
